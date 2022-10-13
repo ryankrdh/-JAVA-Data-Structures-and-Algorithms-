@@ -22,7 +22,25 @@ public class Main {
 //        Arrays.sort(arr1);
 //        System.out.println(Arrays.toString(arr1));
 
-        int result = (int)Math.ceil(1.1F);
-        System.out.println(result);
+//        int result = (int)Math.ceil(1.1F);
+//        double result = Math.round(Math.random() * 100);
+//        int result = (int)(Math.random() * 100);
+//        System.out.println(result);
+//
+//        String[] fruits = {"Apple", "Mango", "Orange"};
+//
+////        for loop
+//        for (int i = 0; i < fruits.length; i++)
+//            System.out.println(fruits[i]);
+////        for each. forward only, cannot iterate backwards. no access to each item.
+//        for (String fruit : fruits)
+//            System.out.println(fruit);
+        int rows = 3;
+        int columns = 4;
+
+        int [][] my2DArray = new int[rows][columns];
+
+        System.out.println(Arrays.deepToString(my2DArray));
+
     }
 }
