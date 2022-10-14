@@ -1,15 +1,8 @@
 package com.javanotes;
 
+// 242. Valid Anagram
 public class Arrays {
-
-    // 242. Valid Anagram
     public boolean isAnagram(String s, String t) {
-//         s = "dog", t = "d g o  "
-//         false
-//         s = "dog", t = "d go"
-//         false
-//         s = "Dog", t = "dgo"
-//         false
 
         // confirm if the lengths of both inputs are same
         if (s.length() != t.length()) {
@@ -34,6 +27,34 @@ public class Arrays {
             // System.out.println(count[i]);
         }
         return true;
+    }
+}
 
+// Challenge 1: Remove Even Integers from an Array.
+class CheckRemoveEven {
+
+    public static int[] removeEven(int[] arr) {
+
+        // Write - Your - Code- Here
+        int oddElements = 0;
+
+        // 1. find the number of odd numbers in the array.
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 != 0) {
+                oddElements++;
+            }
+        }
+
+        // 2. create result array with the size of the odd elements.
+        int[] result = new int[oddElements];
+        int result_index = 0;
+
+        // 3. Add odd element numbers into the new array.
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] % 2 != 0) {
+                result[result_index++] = arr[i];
+            }
+        }
+        return result;
     }
 }
