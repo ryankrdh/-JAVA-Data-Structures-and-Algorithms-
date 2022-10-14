@@ -19,7 +19,7 @@ public class Arrays {
             count[t.charAt(i) - 'a']--;
         }
 
-        // 3. Uses for each to iterate through the array for any alphabet that has not tallied off.
+        // 3. Uses for loop to iterate through the array for any alphabet that has not tallied off.
         for (int i = 0; i < count.length; i++) {
             if (count[i] != 0) {
                 return false;
@@ -29,6 +29,7 @@ public class Arrays {
         return true;
     }
 }
+
 
 // Challenge 1: Remove Even Integers from an Array.
 class CheckRemoveEven {
@@ -58,3 +59,4 @@ class CheckRemoveEven {
         return result;
     }
 }
+//Since the entire array has to be iterated over, this solution is in O(n)
