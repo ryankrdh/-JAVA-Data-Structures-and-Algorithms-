@@ -97,3 +97,36 @@ class CheckMergeArray
     }
 }
 // The time complexity for this algorithm is O(n+m). This is because both arrays are iterated over once.
+
+
+// 88. merge sorted Array
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        // creates a pointer for the last index
+        int index = m + n - 1;
+
+        // 1. int m and n are the lengths of the array, so we need to convert it to index base.
+        m--;
+        n--;
+
+        // 2. Using the while loop, iterate from the back replacing the '0' with larger number
+        while (m >= 0 && n >= 0) {
+            if (nums1[m] > nums2[n]) {
+                nums1[index] = nums1[m];
+                index--;
+                m--;
+            } else {
+                nums1[index] = nums2[n];
+                index--;
+                n--;
+            }
+        }
+
+        while (n >= 0) {
+            nums1[index] = nums2[n];
+            index--;
+            n--;
+        }
+    }
+}
+// time complexity is O(m + n)
