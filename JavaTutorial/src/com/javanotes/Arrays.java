@@ -60,3 +60,40 @@ class CheckRemoveEven {
     }
 }
 //Since the entire array has to be iterated over, this solution is in O(n)
+
+
+// Challenge 2: Merge Two Sorted arrays
+
+class CheckMergeArray
+{
+    // merge arr1 and arr2 into a new result array
+    public static int[] mergeArrays(int[] arr1, int[] arr2) {
+        // write your code here
+        int s1 = arr1.length;
+        int s2 = arr2.length;
+        int [] arr3 = new int[s1 + s2];
+        int i = 0, j = 0, k = 0;
+
+        // 1. Traverse both arrays
+        while (i < s1 && j < s2) {
+            if (arr1[i] < arr2[j]) {
+                arr3[k++] = arr1[i++];
+            }
+            else {
+                arr3[k++] = arr2[j++];
+            }
+        }
+
+        // 2. Store the remaining array.
+
+        while (i < s1) {
+            arr3[k++] = arr1[i++];
+        }
+        while (j < s2) {
+            arr3[k++] = arr2[j++];
+        }
+
+        return arr3; // make a new resultant array and return your results in that
+    }
+}
+// The time complexity for this algorithm is O(n+m). This is because both arrays are iterated over once.
