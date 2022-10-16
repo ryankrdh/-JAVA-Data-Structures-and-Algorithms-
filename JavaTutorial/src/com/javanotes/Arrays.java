@@ -130,3 +130,23 @@ class Solution {
     }
 }
 // time complexity is O(m + n)
+
+
+// 1. Two Sum
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[] {i, map.get(complement)};
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+        // must return something or an error message since our return statement is inside the for loop.
+        throw new IllegalArgumentException("No solutions.");
+    }
+}
+// Time complexity is O(n)
