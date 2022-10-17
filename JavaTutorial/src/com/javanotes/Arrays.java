@@ -150,3 +150,29 @@ class Solution {
     }
 }
 // Time complexity is O(n)
+
+// 238. Product of Array Except Self
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        // the returning result array does not count as extra space.
+        int[] res = new int[nums.length];
+
+        // 1. calculate the left array first
+        res[0] = 1;
+
+        //res[i] is the products of all the elements on the left.
+        for (int i = 1; i < nums.length; i ++) {
+            res[i] = res[i-1] * nums[i-1];
+        }
+
+        // 2. on top of the caculated left array, we add right array to update the res array.
+        // Then we update the res[i] from above with the product of right elements.
+        int R = 1;
+        for (int i = nums.length-1;  i >= 0; i--) {
+            res[i] *= R;
+            R *= nums[i];
+        }
+        return res;
+    }
+}
+// O(n)
