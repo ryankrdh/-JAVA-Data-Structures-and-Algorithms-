@@ -197,3 +197,34 @@ class CheckMinimum {
     }
 }
 // O(n)
+
+
+// Challenge 6: First Non-Repeating Integer in an Array.
+class CheckFirstUnique {
+    public static int findFirstUnique(int[] arr) {
+
+        Map<Integer, Integer> countElements = new HashMap<>();
+        // if the element does not exist in the HashMap, add that element with value of 0.
+        // or else update the number of occurrences of that element by adding 1
+        for (int i = 0; i < arr.length; i++) {
+            if (countElements.containsKey(arr[i])) {
+                int occurrence = countElements.get(arr[i]) + 1;
+                countElements.put(arr[i], occurrence);
+            } else {
+                countElements.put(arr[i], 0);
+            }
+        }
+
+        // Traverse the array and check the number of occurrences
+        // Return the first element with 0 occurrences.
+        for (int i = 0; i < arr.length; i++) {
+            if (countElements.get(arr[i]) == 0) {
+                return arr[i];
+            }
+        }
+
+        // If no such element is found, return -1
+        return -1;
+    }
+}
+// O(n)
