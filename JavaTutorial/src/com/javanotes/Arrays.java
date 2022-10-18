@@ -176,3 +176,24 @@ class Solution {
     }
 }
 // O(n)
+
+
+// Challenge 5: Find minimum Value in Array
+class CheckMinimum {
+
+    public static int findMinimum(int[] arr) {
+        // Write your code here
+
+        int minimum = arr[0];
+
+        // At every index, compare its value with minimum and if its less,
+        // then make that index value new minimum value.
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] < minimum) {
+                minimum = arr[i];
+            }
+        }
+        return minimum;
+    }
+}
+// O(n)
