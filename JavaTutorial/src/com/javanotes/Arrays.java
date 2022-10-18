@@ -228,3 +228,50 @@ class CheckFirstUnique {
     }
 }
 // O(n)
+
+
+// Challenge 7: Find Second Maximum Value in an array.
+class CheckSecondMax {
+
+    public int findSecondMaximum(int[] arr)
+    {
+        // Write - Your - Code
+        int max = -214748364;
+        int secondMax = -214748364;
+
+        for(int i = 0; i < arr.length; i++){
+            if(arr[i] > max){
+                //so that we dod not lose max
+                secondMax = max;
+                max = arr[i];
+            }else if(arr[i] > secondMax && arr[i] != max){
+                secondMax = arr[i];
+            }
+        }
+
+        return secondMax;
+    }
+}
+
+class CheckSecondMax {
+
+    public int findSecondMaximum(int[] arr)
+    {
+        // Write - Your - Code
+        int max = Integer.MIN_VALUE, secondMax = Integer.MIN_VALUE;
+        // Keep track of maximum value, whenever the value at an array index is greater
+        // than current maximum value then make that max value 2nd max value and
+        // make that index value maximum value.
+
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > max) {
+                secondMax = max;
+                max = arr[i];
+            } else if (arr[i] > secondMax && arr[i] != max) {
+                secondMax = arr[i];
+            }
+        }
+        return secondMax;
+    }
+}
+// O(n)
