@@ -296,3 +296,32 @@ class CheckRotateArray{
     }
 }
 // O(n)
+
+
+//Re-arrange Positive & Negative Values
+class CheckReArrange {
+
+    public static void reArrange(int[] arr) {
+        int index = 0;
+        // creates new array to hold the numbers in.
+        int[] newArray = new int[arr.length];
+        // grabs all the negative numbers and puts it in the newArray
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < 0) {
+                newArray[index] = arr[i];
+                index++;
+            }
+        }
+        // grabs all the positive numbers and puts it in the newArray
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                newArray[index] = arr[i];
+                index++
+            }
+        }
+        // transfers the re-arranged elements from newArray to original arr.
+        for (int i = 0; i < newArray.length; i++) {
+            arr[i] = newArray[i];
+        }
+    }
+}
