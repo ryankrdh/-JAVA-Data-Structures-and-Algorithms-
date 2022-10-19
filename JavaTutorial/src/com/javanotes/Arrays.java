@@ -236,8 +236,8 @@ class CheckSecondMax {
     public int findSecondMaximum(int[] arr)
     {
         // Write - Your - Code
-        int max = -214748364;
-        int secondMax = -214748364;
+        int max = Integer.MIN_VALUE;
+        int secondMax = Integer.MIN_VALUE;
 
         for(int i = 0; i < arr.length; i++){
             if(arr[i] > max){
@@ -316,7 +316,7 @@ class CheckReArrange {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] > 0) {
                 newArray[index] = arr[i];
-                index++
+                index++;
             }
         }
         // transfers the re-arranged elements from newArray to original arr.
@@ -325,3 +325,29 @@ class CheckReArrange {
         }
     }
 }
+
+
+// Challenge 10: Rearrange Sorted Array in Max/Min Form.
+class CheckMaxMin {
+
+    public static void maxMin(int[] arr) {
+        int maxIdx = arr.length - 1;
+        int minIdx = 0;
+        int maxElem = arr[maxIdx] + 1; // store any element that is greater than the maximum element in the array
+        for (int i = 0; i < arr.length; i++) {
+            // at even indices we will store maximum elements
+            if (i % 2 == 0) {
+                arr[i] += (arr[maxIdx] % maxElem) * maxElem;
+                maxIdx -= 1;
+            } else { // at odd indices we will store minimum elements
+                arr[i] += (arr[minIdx] % maxElem) * maxElem;
+                minIdx += 1;
+            }
+        }
+        // dividing with maxElem to get original values.
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = arr[i] / maxElem;
+        }
+    }
+}
+//O(n)
