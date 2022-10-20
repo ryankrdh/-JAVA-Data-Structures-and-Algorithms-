@@ -351,3 +351,32 @@ class CheckMaxMin {
     }
 }
 //O(n)
+
+
+//
+
+// Challenge 11: Find the Sum of Maximum Sum Subarray.
+class FindMax {
+    public static int findMaxSumSubArray(int[] arr) {
+        if (arr.length < 1) {
+            return 0;
+        }
+
+        int currMax = arr[0];
+        int globalMax = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            // if currMax is a negative number, start from arr[i]
+            if (currMax < 0) {
+                currMax = arr[i];
+            } else {
+                currMax += arr[i];
+            }
+
+            if (globalMax < currMax) {
+                globalMax = currMax;
+            }
+        }
+        return globalMax;
+    }
+}
+// O(n)
