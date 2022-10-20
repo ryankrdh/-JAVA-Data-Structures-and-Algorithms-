@@ -353,8 +353,6 @@ class CheckMaxMin {
 //O(n)
 
 
-//
-
 // Challenge 11: Find the Sum of Maximum Sum Subarray.
 class FindMax {
     public static int findMaxSumSubArray(int[] arr) {
@@ -377,6 +375,26 @@ class FindMax {
             }
         }
         return globalMax;
+    }
+}
+// O(n)
+
+
+// 121. Best Time to Buy and Sell Stock
+class Solution {
+    public int maxProfit(int[] prices) {
+
+        // 1. find the min.
+        int min = Integer.MAX_VALUE;
+        int max = 0;
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < min)
+                min = prices[i];
+            else if (prices[i] - min > max) {
+                max = prices[i] - min;
+            }
+        }
+        return max;
     }
 }
 // O(n)
