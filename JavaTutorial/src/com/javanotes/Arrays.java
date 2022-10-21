@@ -398,3 +398,29 @@ class Solution {
     }
 }
 // O(n)
+
+
+// 217. Contains Duplicate
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+
+        // corner case.
+        if (nums == null || nums.length == 0) {
+            return false;
+        }
+
+        // 1. store the count
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        //2.
+        for(int key : map.keySet()) {
+            if(map.get(key) > 1)
+                return true;
+        }
+        return false;
+    }
+}
+// O(n)
