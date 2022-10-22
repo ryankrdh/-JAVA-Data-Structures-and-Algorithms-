@@ -380,6 +380,50 @@ class FindMax {
 // O(n)
 
 
+// 53. Maximum Subarray
+class Solution {
+    public int maxSubArray(int[] nums) {
+
+        int n = nums.length;
+        int currSum  = nums[0], maxSum = nums[0];
+
+        for (int i = 1; i < n; i++) {
+            currSum = Math.max(nums[i], currSum + nums[i]);
+            maxSum = Math.max(maxSum, currSum);
+        }
+        return maxSum;
+    }
+}
+//O(n)
+
+
+// 152. Maximum Product Subarray
+class Solution {
+    public int maxProduct(int[] nums) {
+
+        int min = nums[0];
+        int max = nums[0];
+        int res = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            // We store the min here because later on min will be modified.
+            // The numbers can switch into negative, so min = Math.min(nums[i], min) is wrong.
+            int originalMin = min;
+
+            min = Math.min(nums[i], Math.min(max * nums[i], min * nums[i]));
+            // We are using the original min here because the new min already got modified.
+            max = Math.max(nums[i], Math.max(max * nums[i], originalMin * nums[i]));
+
+            if (max > res) {
+                res = max;
+            }
+        }
+
+        return res;
+    }
+}
+// O(n)
+
+
 // 121. Best Time to Buy and Sell Stock
 class Solution {
     public int maxProfit(int[] prices) {
