@@ -470,7 +470,8 @@ class Solution {
 // O(n)
 
 
-// 153. Find Minimum in Rotated Sorted Array
+// 153. Find Minimum in Rotated Sorted Array.
+// must solve in O(log n)
 class Solution {
     public int findMin(int[] nums) {
         if (nums.length == 1) {
@@ -493,3 +494,18 @@ class Solution {
     }
 }
 // same as binary search O(logN)
+
+
+// 1480 Running sum of 1d Array.
+class Solution {
+    public int[] runningSum(int[] nums) {
+
+        // nums[1] since nums[0] stays the same.
+        for (int i = 1; i < nums.length; i++) {
+            nums[i] += nums[i-1];
+        }
+
+        return nums;
+    }
+}
+// O(n)
