@@ -278,7 +278,7 @@ class CheckSecondMax {
 // O(n)
 
 
-// Right Rotate the Array by One Index
+// Challenge 8: Right Rotate the Array by One Index
 class CheckRotateArray{
 
     public static void rotateArray(int[] arr){
@@ -298,7 +298,7 @@ class CheckRotateArray{
 // O(n)
 
 
-//Re-arrange Positive & Negative Values
+// Challenge 9: Re-arrange Positive & Negative Values
 class CheckReArrange {
 
     public static void reArrange(int[] arr) {
@@ -543,3 +543,45 @@ class Solution {
     }
 }
 // O(logN)
+
+
+// 118. Pascal's Triangle
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        // Creates a List within a list.
+        List<List<Integer>> res = new ArrayList<>();
+
+        // corner case
+        if (numRows == 0) {
+            return res;
+        }
+
+        // 1. add the first row first
+        List<Integer> firstRow = new ArrayList<>();
+        firstRow.add(1);
+        res.add(firstRow);
+
+        // 2. start adding by finding the previous row
+        for (int i = 1; i < numRows; i++) {
+            List<Integer> previousRow = res.get(i - 1);
+            List<Integer> curRow = new ArrayList<>(); // curRow needs to be put inside the for loop, so it gets empty every iteration for for loop. If it is placed outside the for loop, then the elements will not get removed if we move to the next level/row.
+
+            // 2-1. add 1 in the current row first because every first element in every row is 1.
+            curRow.add(1);
+
+            // 2-2 start adding the middle part
+            // j starts with index 1 because index 0 is 1. We added already.
+            // j ends with i because ith row has i elements.
+            for (int j = 1; j < i; j++) {
+                curRow.add(previousRow.get(j) + previousRow.get(j-1));
+            }
+
+            //2-3 add 1 to the last element.
+            curRow.add(1);
+            res.add(curRow);
+        }
+        return res;
+    }
+
+}
+// O(N^2)
