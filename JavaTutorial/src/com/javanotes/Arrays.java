@@ -585,3 +585,34 @@ class Solution {
 
 }
 // O(N^2)
+
+
+// 189. Rotate Array
+class Solution {
+    public void rotate(int[] nums, int k) {
+        // if k > nums.length
+        // we do not neeed to do k times rotation, we do (k % nums.length) times instead.
+        // for example if k = 8. because of k % nums.length, we only do 1 time.
+        k %= nums.length;
+
+        // [1, 2, 3, 4, 5, 6, 7] k = 3
+
+        // [7, 6, 5, 4, 3, 2, 1]
+        reverse(nums, 0, nums.length-1);
+        // '[5, 6, 7]', [4, 3, 2, 1]
+        reverse(nums, 0, k-1);
+        // [5, 6, 7] '[1, 2, 3, 4]'
+        reverse(nums, k, nums.length-1);
+    }
+
+    public void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start ++;
+            end --;
+        }
+    }
+}
+//O(n)
