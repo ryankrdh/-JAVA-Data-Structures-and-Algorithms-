@@ -616,3 +616,21 @@ class Solution {
     }
 }
 //O(n)
+
+
+// 1304. Find N Unique Integers Sum up to Zero
+class Solution {
+    public int[] sumZero(int n) {
+
+        int[] result = new int[n];
+        int total = 0;
+        for (int i = 0; i < n - 1; i++) {
+            result[i] = i+1;
+            total += result[i];
+        }
+        result[n-1] = -1 * total;
+
+        return result;
+    }
+}
+// O(n)
