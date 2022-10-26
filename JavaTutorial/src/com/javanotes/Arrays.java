@@ -1,30 +1,34 @@
 package com.javanotes;
 
 // 242. Valid Anagram
-public class Arrays {
+class Solution {
     public boolean isAnagram(String s, String t) {
-
-        // confirm if the lengths of both inputs are same
+        //corner case
         if (s.length() != t.length()) {
             return false;
         }
-
-        // 1. create new empty array of 26 spaces
-        int[] count = new int[26];
-
-        // 2. Uses for loop to keep tally for each alphabet in the input.
-        // subtracts the unicode of 'a' to get i
-        for (int i = 0; i < s.length(); i++) {
-            count[s.charAt(i) - 'a']++;
-            count[t.charAt(i) - 'a']--;
+        if (s.length() == 0 && s.length() == t.length()) {
+            return true;
         }
 
-        // 3. Uses for loop to iterate through the array for any alphabet that has not tallied off.
-        for (int i = 0; i < count.length; i++) {
-            if (count[i] != 0) {
+        // 1. store the count with map
+        HashMap<Character, Integer> map = new HashMap <>();
+
+        // at key of s.charAt(i), if I can get s.charAt(i) add one, if not default 0.
+        for (int i = 0; i < s.length(); i++) {
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+        }
+
+        for (int i = 0; i < t.length(); i++) {
+            map.put(t.charAt(i), map.getOrDefault(t.charAt(i), 0) - 1);
+        }
+
+        //2. check the counts
+        for (char key : map.keySet()) {
+            int count = map.get(key);
+            if (count != 0) {
                 return false;
             }
-            // System.out.println(count[i]);
         }
         return true;
     }
