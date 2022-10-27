@@ -432,13 +432,14 @@ class Solution {
 class Solution {
     public int maxProfit(int[] prices) {
 
-        // 1. find the min.
+        // 1. variable to hold the lowest and the highest value.
         int min = Integer.MAX_VALUE;
-        int max = 0;
+        int max = Integer.MIN_VALUE;
+
         for (int i = 0; i < prices.length; i++) {
-            if (prices[i] < min)
+            if (prices[i] < min) {
                 min = prices[i];
-            else if (prices[i] - min > max) {
+            } else if (prices[i] - min > max) {
                 max = prices[i] - min;
             }
         }
