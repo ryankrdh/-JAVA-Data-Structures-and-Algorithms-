@@ -146,6 +146,7 @@ class Solution {
             if (map.containsKey(complement)) {
                 return new int[] {i, map.get(complement)};
             } else {
+                // nums[i] is at the index of 0.
                 map.put(nums[i], i);
             }
         }
