@@ -169,7 +169,7 @@ class Solution {
             res[i] = res[i-1] * nums[i-1];
         }
 
-        // 2. on top of the caculated left array, we add right array to update the res array.
+        // 2. on top of the calculated left array, we add right array to update the res array.
         // Then we update the res[i] from above with the product of right elements.
         int R = 1;
         for (int i = nums.length-1;  i >= 0; i--) {
@@ -619,8 +619,10 @@ class Solution {
 
         // [7, 6, 5, 4, 3, 2, 1]
         reverse(nums, 0, nums.length-1);
+
         // '[5, 6, 7]', [4, 3, 2, 1]
         reverse(nums, 0, k-1);
+
         // [5, 6, 7] '[1, 2, 3, 4]'
         reverse(nums, k, nums.length-1);
     }
