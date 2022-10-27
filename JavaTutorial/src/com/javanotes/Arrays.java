@@ -644,8 +644,11 @@ class Solution {
 
         int[] result = new int[n];
         int total = 0;
-        for (int i = 0; i < n - 1; i++) {
-            result[i] = i+1;
+
+        // assigning += 1 to each index. Grabbing the total and putting the negative number
+        // of the total at the end to make the sum 0.
+        for (int i = 0; i < n - 1; i++) { // n - 1 since we only want to loop one before the last element.
+            result[i] = i + 1;
             total += result[i];
         }
         result[n-1] = -1 * total;
@@ -684,6 +687,47 @@ class Solution {
         }
         return -1;
 
+    }
+}
+// O(n)
+
+
+// 628 Maximum Product of Three Numbers.
+public class Solution {
+    public int maximumProduct(int[] nums) {
+
+        // corner case
+        if (nums == null || nums.length == 0)
+            return 0;
+        // you need two lowest numbers just in case of two negatives resulting in a positive number.
+        int min1 = Integer.MAX_VALUE, min2 = Integer.MAX_VALUE;
+        int max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE, max3 = Integer.MIN_VALUE;
+
+        // 1. find min1, min2, max1, max2, max3
+        for (int num : nums) {
+            // n is greater than max1, max2 and max3
+            if (num > max1) {
+                max3 = max2;
+                max2 = max1;
+                max1 = num;
+                // n lies between max2 and max3
+            } else if (num > max2) {
+                max3 = max2;
+                max2 = num;
+                // n lies between max2 and max3
+            } else if (num > max3) {
+                max3 = num;
+            }
+            // n is greater than min1 and min2
+            if (num < min1) {
+                min2 = min1;
+                min1 = num;
+                // n lies between min1 and min2
+            } else if (num < min2) {
+                min2 = num;
+            }
+        }
+        return Math.max(min1*min2*max1, max1*max2*max3);
     }
 }
 // O(n)
