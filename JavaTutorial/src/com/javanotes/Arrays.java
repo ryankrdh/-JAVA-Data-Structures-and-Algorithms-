@@ -656,4 +656,34 @@ class Solution {
 // O(n)
 
 
-//
+// 724. Find Pivot Index
+class Solution {
+    public int pivotIndex(int[] nums) {
+        // corner case: ask what will it return if array is empty?
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+
+        // 1. calculate the total sum
+        int totalSum = 0;
+        for (int num : nums) {
+            totalSum += num;
+        }
+
+        // 2. calculate left sum and right sum.
+        // 2-1. see if left == right.
+        int leftSum = 0; // placed outside of for loop so we save the reference.
+        for (int i = 0; i < nums.length; i++) {
+            // i = 0 has no leftSum
+            if (i != 0) {
+                leftSum += nums[i-1];
+            }
+            if (leftSum == totalSum - leftSum - nums[i]) {
+                return i;
+            }
+        }
+        return -1;
+
+    }
+}
+// O(n)
