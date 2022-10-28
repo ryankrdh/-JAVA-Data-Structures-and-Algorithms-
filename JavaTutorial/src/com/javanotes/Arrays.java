@@ -734,3 +734,35 @@ public class Solution {
     }
 }
 // O(n)
+
+
+// 448. Find All Numbers Disappeared in an Array.
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) {
+        // When the value is x, we mark the value at position x negative.
+        // meaning value x exists
+        // for the value to become newIndex, we only check the absolute value since it may be marked negative before.
+        // example ([4, 3, 2, 7, 8, 2, 3, 1]):
+        // At index[0] which is 4. We will subtract the absolute value of 4 by 1.
+        // In this case the newIndex is 3 and the position is 4. The element at that position will be turned into negative. Because we want to indicate that the position (4) is in the array.
+
+        for (int i = 0; i < nums.length; i++) {
+            // treat the value as the new index.
+            int newIndex = Math.abs(nums[i]) -1;
+            if (nums[newIndex] > 0) {
+                nums[newIndex] *= -1;
+            }
+        }
+
+        // 2. if the value is positive, meaning the position of that value is missing in the array.
+        // if the value is positive, then the position number indicates which number in the array is missing.
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                res.add(i+1);
+            }
+        }
+        return res;
+    }
+}
+// O(n)
