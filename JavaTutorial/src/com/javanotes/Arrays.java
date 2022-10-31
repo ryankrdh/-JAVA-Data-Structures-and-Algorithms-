@@ -429,7 +429,7 @@ class Solution {
 // O(n)
 
 
-// 121. Best Time to Buy and Sell Stock
+// 121. Best Time to Buy and Sell Stock (see 122)
 class Solution {
     public int maxProfit(int[] prices) {
 
@@ -450,7 +450,7 @@ class Solution {
 // O(n)
 
 
-//122. Best Time to Buy and Sell Stock II
+//122. Best Time to Buy and Sell Stock II (see 121)
 class Solution {
     public int maxProfit(int[] prices) {
         int maxprofit = 0;
@@ -736,7 +736,7 @@ public class Solution {
 // O(n)
 
 
-// 448. Find All Numbers Disappeared in an Array.
+// 448. Find All Numbers Disappeared in an Array. (see 442)
 class Solution {
     public List<Integer> findDisappearedNumbers(int[] nums) {
         // When the value is x, we mark the value at position x negative.
@@ -765,4 +765,25 @@ class Solution {
         return res;
     }
 }
-// O(n)
+// time O(n). space O(1) constant
+
+
+// Find All Duplicates in an Array. (see 448)
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < nums.length; i++) {
+            // we treat value as the new index
+            // if we see a '4', we want to put into the array at position 4 and make it to negativ so that we know that '4' existed
+            int newIndex = Math.abs(nums[i]) -1;
+            if (nums[newIndex] < 0) {
+                res.add(Math.abs(nums[i]));
+            } else {
+                nums[newIndex] *= -1;
+            }
+        }
+        return res;
+    }
+}
+//  time O(n). space O(1) constant
