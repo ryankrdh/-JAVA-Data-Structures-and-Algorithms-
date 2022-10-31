@@ -768,7 +768,7 @@ class Solution {
 // time O(n). space O(1) constant
 
 
-// Find All Duplicates in an Array. (see 448)
+// 442. Find All Duplicates in an Array. (see 448)
 class Solution {
     public List<Integer> findDuplicates(int[] nums) {
 
@@ -787,3 +787,57 @@ class Solution {
     }
 }
 //  time O(n). space O(1) constant
+
+
+// 283. Move Zeroes.
+class Solution {
+    public void moveZeroes(int[] nums) {
+        // We move the non-zero element to the front by swapping the non-zero element and zero
+
+        int anchor = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                int temp = nums[anchor];
+                nums[anchor] = nums[i];
+                nums[i] = temp;
+                // 2. move anchor to the next position to store the next element if we did the swap
+                anchor++;
+            }
+        }
+    }
+}
+// Time O(n). space O(1)
+
+
+// 26. Remove Duplicates from Sorted Array.
+class Solution {
+    public int removeDuplicates(int[] nums) {
+
+        // corner case
+        if (nums.length == 0 || nums == null) {
+            return 0;
+        }
+
+        int index = 1;
+        for (int i = 0; i < nums.length - 1; i++) {
+            // if the current number is not the same as the next number.
+            if (nums[i] != nums[i + 1]) {
+                // we save the next number
+                nums[index] = nums[i + 1];
+                // move the index so that it can save the next number
+                index++;
+            }
+        }
+        // it does not matter what the numbers are beyond the returned index of the array.
+        // example output 5, nums = [0, 1, 2, 3, 4, 1, 1, 2, 2, 3, 4, 4, 4]
+        return index;
+        /*
+        Why do we return the index instead of the array, but still getting the array as an answer?
+        because we are modifying the input array. We will get the array as an answer even
+        if we jus return the index.
+        */
+    }
+}
+// time O(n). space O(1)
+
+
