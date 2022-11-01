@@ -866,3 +866,39 @@ class Solution {
     }
 }
 // time O(n^2). space O(1)
+
+
+// 349. Intersection of Two Arrays I (see 350)
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+
+        // turn nums1 array into set.
+        Set<Integer> set = new HashSet<>();
+        for (int num1 : nums1) {
+            set.add(num1);
+        }
+
+        // creates a set called intersection. Add numbers if num1 set has num2 numbers.
+        Set<Integer> intersection = new HashSet<>();
+        for (int num2 : nums2) {
+            if (set.contains(num2)) {
+                intersection.add(num2);
+            }
+        }
+
+        // initializing a new array called result. appending each element from the intersection set.
+        int[] res = new int[intersection.size()];
+        // need to initialize i for iterating through res.
+        int i = 0;
+        // Integer is a wrapper class of int. It's a convenient way to use object methods for primitive values.
+        // Cannot use for loop here because a Set is not like a List and the elements are not indexed.
+        for (Integer num : intersection) {
+            res[i] = num;
+            i++;
+        }
+        return res;
+    }
+}
+// time O(n). space O(n)
+
+// 350. Intersection of Two Arrays II (see 349)
