@@ -841,3 +841,28 @@ class Solution {
 // time O(n). space O(1)
 
 
+// 832. Flipping an Image.
+class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+        /*
+        [solution 2 - one pass]
+        1. If they are different, dont do anything, just keep traversing
+        2. if they are the same, change 0 to 1, 1 to 0.
+        */
+
+        for (int i = 0; i < image.length; i++) {
+            int start = 0;
+            int end = image.length -1;
+            while (start <= end) {
+                if (image[i][start] == image[i][end]){
+                    image[i][start] = image[i][start] == 0 ? 1 : 0;
+                    image[i][end] = image[i][start];
+                }
+                start++;
+                end--;
+            }
+        }
+        return image;
+    }
+}
+// time O(n^2). space O(1)
