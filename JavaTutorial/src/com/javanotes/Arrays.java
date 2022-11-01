@@ -659,7 +659,7 @@ class Solution {
         return result;
     }
 }
-// O(n)
+// time O(n). space O(n)
 
 
 // 724. Find Pivot Index
@@ -902,3 +902,33 @@ class Solution {
 // time O(n). space O(n)
 
 // 350. Intersection of Two Arrays II (see 349)
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        ArrayList<Integer> result = new ArrayList<>();
+
+        // 1. add num1 into map
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num1 : nums1) {
+            map.put(num1, map.getOrDefault(num1, 0) + 1);
+
+        }
+
+        // 2. check if num2 is in the map, if the count > 0, we add to our res and -1 count.
+        for (int num2 : nums2) {
+            if (map.containsKey(num2)) {
+                if (map.get(num2) > 0) {
+                    result.add(num2);
+                    map.put(num2, map.get(num2) - 1);
+                }
+            }
+        }
+
+        // 3. transform arrayList into int[]
+        int[] res = new int[result.size()];
+        for (int i = 0; i < res.length; i++) {
+            res[i] = result.get(i);
+        }
+        return res;
+    }
+}
+// time O(n). space O(n)
