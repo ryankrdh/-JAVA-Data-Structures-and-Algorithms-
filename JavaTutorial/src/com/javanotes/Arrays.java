@@ -133,7 +133,7 @@ class Solution {
         }
     }
 }
-// time complexity is O(m + n)
+// time O(m + n). space O(1)
 
 
 // 1. Two Sum
@@ -154,7 +154,7 @@ class Solution {
         throw new IllegalArgumentException("No solutions.");
     }
 }
-// Time complexity is O(n)
+// Time O(n). space O(n) ??
 
 // 238. Product of Array Except Self
 class Solution {
@@ -180,7 +180,7 @@ class Solution {
         return res;
     }
 }
-// O(n)
+// time O(n). space O(n)
 
 
 // Challenge 5: Find minimum Value in Array
@@ -605,7 +605,7 @@ class Solution {
     }
 
 }
-// O(N^2)
+// time O(N^2). spaceO(n^2) ???
 
 
 // 189. Rotate Array
@@ -932,3 +932,75 @@ class Solution {
     }
 }
 // time O(n). space O(n)
+
+
+// 532. K-diff pairs in an array.
+class Solution {
+    public int findPairs(int[] nums, int k) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+
+        // 1. sort the array
+        Arrays.sort(nums);
+
+        // 2. if we found a pair, we move left till diff number
+        int left = 0;
+        int right = 1;
+        int count = 0;
+        while (left < nums.length && right < nums.length) {
+            if (nums[right] - nums[left] > k) {
+                left++;
+            } else if (left == right || nums[right] - nums[left] < k) {
+                right++;
+            } else if (nums[right] - nums[left] == k) {
+                count++;
+                left++;
+                // if(nums[left] == nums[left - 1]) is wrong. if we use IF, then it will only execute once. We need to do while loop, it will execute till the condition fails.
+                while (left <nums.length && nums[left] == nums[left - 1]) {
+                    left++;
+                }
+            }
+        }
+        return count;
+    }
+}
+// time(nlogn). space(n)
+
+
+// 169. Majority Element
+class Solution {
+    public int majorityElement(int[] nums) {
+        // HASH TABLE SOLUTION
+
+        // 1. store the counts
+        /*
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) +1);
+        }
+
+        // 2. find the counts > nums.length/2
+        int res = 0;
+        for (int key : map.keySet()) {
+            if (map.get(key) > (nums.length/2)) {
+                res = key;
+            }
+        }
+        return res;
+        */
+        // time O(N). space O(N)
+
+        // BOYER-MOORE VOTING ALGORITHM
+        Integer candidate = null;
+        int count = 0;
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+            }
+            count += (num == candidate) ? 1 : -1;
+        }
+        return candidate;
+        // time O(N). space O(1)
+    }
+}
