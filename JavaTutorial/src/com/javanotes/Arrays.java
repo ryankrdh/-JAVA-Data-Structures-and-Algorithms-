@@ -1249,3 +1249,39 @@ public class DoublyLinkedList<T> {
         }
     }
 }
+
+
+// 206. Reverse Linked List
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        // Solution 1: Iterative
+        ListNode cur = head;
+        ListNode pre = null;
+        // swapping
+        while (cur != null) {
+            //1. We set the nextNode first.
+            ListNode nextNode = cur.next;
+
+            //2. we link the current node to previous node.
+            cur.next = pre;
+
+            //3. because of reverse, the previous node is current node.
+            pre = cur;
+
+            //4. and the current node should be next node.
+            cur = nextNode;
+        }
+        return pre;
+    }
+}
+
