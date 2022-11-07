@@ -1333,3 +1333,58 @@ class Solution {
     }
 }
 // Time O(N+M). Space O(1)
+
+
+// 234. Palindrome Linked List
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        // to check if palindrome in linked list - use Two Pointers!!
+
+        // 1. find the middle
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // 1-1. slow will be the head of second half
+        // 1-2. we assign head of first half to fast.
+        // 1-3. we reverse slow and check if fast linked list = slow linked list
+        slow = reversed(slow);
+        fast = head; //[1,2,3,3] since the link from node 3 to 3 is not touched even when [3,2,1] is reversed
+
+        // 2. check if they are the same
+        while (slow != null) {
+            if (slow.val != fast.val) {
+                return false;
+            }
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return true;
+    }
+    // check 206. Reverse Linked List
+    public ListNode reversed(ListNode head) {
+        ListNode pre = null;
+
+        while(head != null) {
+            ListNode next = head.next;
+            head.next = pre;
+            pre = head;
+            head = next;
+        }
+        return pre;
+    }
+}
+// Time O(n). Space O(1)
