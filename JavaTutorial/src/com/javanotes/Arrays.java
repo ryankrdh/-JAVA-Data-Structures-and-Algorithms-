@@ -1264,7 +1264,7 @@ public class DoublyLinkedList<T> {
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
-        // Solution 1: Iterative
+        // Solution 1: Iterative. Time O(n). Space O(1)
         ListNode cur = head;
         ListNode pre = null;
         // swapping
@@ -1285,3 +1285,51 @@ class Solution {
     }
 }
 
+// 21. Merge Two Sorted Lists
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        //corner case
+        if (list1 == null && list2 == null) {
+            return null;
+        }
+
+        //1. create dummy and cur
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+
+        while (list1 != null && list2 != null){
+            if(list1.val <= list2.val) {
+                cur.next = list1;
+                list1 = list1.next;
+            } else if (list1.val > list2.val) {
+                cur.next = list2;
+                list2 = list2.next;
+            }
+            // don't forget to move thecur
+            cur = cur.next;
+        }
+        // in case one list is done and another has not, we attach the whole list to cur
+        cur.next = list1 == null ? list2 : list1;
+
+        // if (list1 != null) {
+        //     cur.next = list1;
+        //     list1 = list1.next;
+        // }
+        // if (list2 != null) {
+        //     cur.next = list2;
+        //     list2 = list2.next;
+        // }
+        return dummy.next;
+    }
+}
+// Time O(N+M). Space O(1)
