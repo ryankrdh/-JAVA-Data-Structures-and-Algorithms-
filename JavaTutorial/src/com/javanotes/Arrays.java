@@ -1413,3 +1413,185 @@ class Solution {
     }
 }
 // Time O(n). Space O(1)
+
+
+// 706. Design Hashmap
+class MyHashMap {
+    // Initialize your data structure here.
+
+    // Hashmap important trait is that it has KEY as its pre-calculated index.
+    // what else has key as its index?
+    // array does not have key but it has pre-calculated index as well
+
+    int[] res;
+    public MyHashMap() {
+        res = new int[1000001];
+        Arrays.fill(res, -1); // if value does not exist. return -1.
+    }
+
+    // value will always be non-negative.
+    public void put(int key, int value) {
+        res[key] = value;
+    }
+
+    // returns the value to which specified key is mapped, or -1 if this map contains no mapping for the key
+    public int get(int key) {
+        return res[key];
+    }
+
+    public void remove(int key) {
+        res[key] = -1;
+    }
+}
+
+/**
+ * Your MyHashMap object will be instantiated and called as such:
+ * MyHashMap obj = new MyHashMap();
+ * obj.put(key,value);
+ * int param_2 = obj.get(key);
+ * obj.remove(key);
+ */
+//
+
+
+// 160. Intersection of Two Linked Lists.
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+
+
+// 160. Intersection of Two Linked Lists
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        // corner case
+        if (headA == null && headB == null) {
+            return null;
+        }
+
+        // 1. we create a pointer for each linked list
+        ListNode aPointer = headA;
+        ListNode bPointer = headB;
+
+        // 2. while they are not the same, both pointers go one step.
+        // if any linked list reach the end, we assign the other linked list's head to that pointer.
+        // why? so that both pointers travel the same length and with same speed, they will meet at intersection.
+        while (aPointer != bPointer) {
+
+            if (aPointer == null) {
+                aPointer = headB;
+            } else {
+                aPointer = aPointer.next;
+            }
+
+            if (bPointer == null) {
+                bPointer = headA;
+            } else {
+                bPointer = bPointer.next;
+            }
+        }
+        // return any of the pointer that is the same
+        return aPointer;
+    }
+}
+// Time O(M + N). Space O(1)
+
+
+// 83. Remove Duplicates from Sorted List
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        // corner case
+        if (head == null) {
+            return null;
+        }
+
+        // 1. create a current node to loop through every node.
+        ListNode cur = head;
+        while (cur != null && cur.next != null) {
+            // 2. if the current node's value is the same as the next node's value, we skip the next node
+            // node1 -> node2 -> node3
+            // if (node1.val == node2.val): we delete the node2 by changing the next pointer.
+            // node1 -> node3
+            if (cur.val == cur.next.val) {
+                cur.next = cur.next.next;
+
+                // 3. if not, then we just move the current pointer to the next node for the next iteration check.
+            } else {
+                cur = cur.next;
+            }
+        }
+        return head;
+    }
+}
+// time O(n). space O(1)
+
+
+// 82. Remove Duplicates from Sorted List II
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        // corner case
+        if (head == null || head.next == null) {
+            return head;
+        }
+
+        ListNode dummy = new ListNode(-1);
+        ListNode cur = dummy;
+
+
+        dummy.next = head;
+
+        while (head != null && head.next != null) {
+            // 1. if this val == the next val
+            if (head.val == head.next.val) {
+                while (head.next != null && head.val == head.next.val) {
+                    // keep moving head pointer till we meet a different value node for head.next
+                    head = head.next;
+                }
+                // after the while loop ends. Now, the head is the last element of the duplicate node.
+                // since we do not want any duplicate node, we move head to the next node.
+                // so the head now is a completely new node.
+                // and we link the pointer by p.next = head
+                head = head.next;
+                cur.next = head;
+                // 2. if this val != the next val
+            } else {
+                // we move both head and cur pointer to the next node to keep checking
+                head = head.next;
+                cur = cur.next;
+            }
+        }
+        return dummy.next;
+    }
+}
+
+// time O(n). space O(1)
