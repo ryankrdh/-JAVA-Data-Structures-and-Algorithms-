@@ -1595,5 +1595,100 @@ class Solution {
         return dummy.next;
     }
 }
-
 // time O(n). space O(1)
+
+
+// 203. Remove Linked List Elements
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        // corner case
+        if (head == null) {
+            return head;
+        }
+
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        ListNode cur = head;
+        ListNode pre = dummy;
+
+        while(cur != null) {
+            if (cur.val == val) {
+                // we want to remove cur node.
+                pre.next = cur.next;
+                cur = cur.next;
+            } else {
+                // move pre and cur to the next node
+                pre = cur;
+                cur = cur.next;
+            }
+        }
+        return dummy.next;
+    }
+}
+// Time: O(n). space O(1)
+
+
+// 237. Delete Node in a Linked List.
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public void deleteNode(ListNode node) {
+        node.val = node.next.val;
+        node.next = node.next.next;
+    }
+}
+// time O(1). space O(1)
+
+
+// 92. Reverse Linked List II
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseBetween(ListNode head, int left, int right) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode pre = dummy;
+
+        // pre of m: we want pre to go to m - 1 position, which is m - 2 index
+        // we move m - 1 steps which is m - 1 position
+        for(int i = 0; i < left - 1; i++) {
+            pre = pre.next;
+        }
+        ListNode cur = pre.next;
+        // we know how many times we need to reverse the linked list
+        while(left < right) {
+            ListNode next = cur.next;
+            cur.next = next.next;
+            next.next = pre.next;
+            pre.next = next;
+            left++;
+        }
+        return dummy.next;
+    }
+}
+// time O(n), space O(1)
