@@ -542,6 +542,7 @@ class Solution {
             if (nums[mid] == target) {
                 return mid;
             }
+            // check if left side is in ascending order.
             if (nums[left] <= nums[mid]) {
                 // if the target is in the left half, move the right pointer to the left.
                 if (target >= nums[left] && target < nums[mid]) {
@@ -552,6 +553,7 @@ class Solution {
                 }
             } else {
                 // if the target is in the right half, move the left pointer to the right.
+                // we want the left pointer to end up at the minimum value.
                 if (target > nums[mid] && target <= nums[right]) {
                     left = mid + 1;
                 } else {
