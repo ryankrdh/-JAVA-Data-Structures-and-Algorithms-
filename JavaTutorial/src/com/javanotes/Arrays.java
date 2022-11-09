@@ -1,5 +1,5 @@
 package com.javanotes;
-
+曾方雯
 // 242. Valid Anagram
 class Solution {
     public boolean isAnagram(String s, String t) {
@@ -1317,7 +1317,7 @@ class Solution {
                 cur.next = list2;
                 list2 = list2.next;
             }
-            // don't forget to move thecur
+            // don't forget to move the cur
             cur = cur.next;
         }
         // in case one list is done and another has not, we attach the whole list to cur
@@ -1692,3 +1692,98 @@ class Solution {
     }
 }
 // time O(n), space O(1)
+
+
+// 141. Linked List Cycle.
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        // corner case
+        if (head == null) {
+            return false;
+        }
+
+        // Solution 1: No Extra space. Two pointers.
+        ListNode slow = head;
+        ListNode fast = head;
+        while (fast != null && fast.next != null) {
+            // slow moves one step.
+            slow = slow.next;
+            // fast moves two steps.
+            fast = fast.next.next;
+            if (slow == fast) {
+                return true;
+            }
+        }
+        return false;
+        // Time O(n). space O(1)
+
+        Solution 2: Hash Set
+        Set<ListNode> nodesSeen = new HashSet<>();
+        while (head != null) {
+            if (nodesSeen.contains(head)) {
+                return true;
+            } else {
+                nodesSeen.add(head);
+            }
+            head = head.next;
+        }
+        return false;
+        // time O(n). space O(n)
+    }
+}
+
+
+// 2. Add Two Numbers
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(-1);
+        ListNode head = dummy;
+        int carry = 0;
+
+        while(l1 != null || l2 != null) {
+            int sum = carry; // any number that is carried over from prev. node.
+            if (l1 != null) { // adding to sum from l1 and moving the node along l1
+                sum += l1.val;
+                l1 = l1.next;
+            }
+            if (l2 != null) { // adding to sum from l2 and moving the node along l2
+                sum += l2.val;
+                l2 = l2.next;
+            }
+
+            // add this current number to the head.next.
+            // need to initialize a new node since the sum isn't a node.
+            head.next = new ListNode(sum % 10); // this is the remainder number if the sum goes above 10.
+            // move head to the next one and keep adding the element.head = head.next;
+            head = head.next;
+            carry = sum / 10; // remainder number that goes to the next.
+        }
+        if (carry != 0) {
+            head.next = new ListNode(carry); // need to initialize node here as well since carry isn't a node.
+        }
+        return dummy.next;
+    }
+}
+// time O(max(N,M)). space O(max(N,M))
+// Depends on the bigger linked list between N and M that will determine the time and space complexity.
