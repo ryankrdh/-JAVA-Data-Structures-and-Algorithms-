@@ -1787,3 +1787,59 @@ class Solution {
 }
 // time O(max(N,M)). space O(max(N,M))
 // Depends on the bigger linked list between N and M that will determine the time and space complexity.
+
+
+//445. Add Two Numbers II
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+        // Stack FILO/LIFO.
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Integer> s2 = new Stack<>();
+
+        // We use stack as it is FILO so we can get the least significant number first later.
+        while (l1 != null || l2 != null) {
+            if (l1 != null) {
+                s1.push(l1.val);
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                s2.push(l2.val);
+                l2 = l2.next;
+            }
+        }
+
+        ListNode head = null;
+        int carry = 0;
+
+        while(!s1.isEmpty() || !s2.isEmpty() || carry != 0) {
+            int sum = carry;
+            if (!s1.isEmpty()) {
+                sum += s1.pop();
+            }
+            if (!s2.isEmpty()) {
+                sum += s2.pop();
+            }
+
+            // creates a new node each time to assign to the head.
+            ListNode newNode = new ListNode(sum % 10); // this is the remainder number if the sum goes above 10.
+
+            // We reverse the linked list so that the least significant number will be at the last position.
+            newNode.next = head;
+            head = newNode;
+            carry = sum / 10;
+        }
+        return head;
+    }
+}
+// time O(M+N). space O(M+N)
