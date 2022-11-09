@@ -151,10 +151,11 @@ class Solution {
             }
         }
         // must return something or an error message since our return statement is inside the for loop.
-        throw new IllegalArgumentException("No solutions.");
+        return new int[] {};
+        // throw new IllegalArgumentException("No solutions.");
     }
 }
-// Time O(n). space O(n) ??
+// Time O(n). space O(n)
 
 // 238. Product of Array Except Self
 class Solution {
@@ -180,7 +181,7 @@ class Solution {
         return res;
     }
 }
-// time O(n). space O(n)
+// time O(n). space O(1)
 
 
 // Challenge 5: Find minimum Value in Array
@@ -607,15 +608,15 @@ class Solution {
     }
 
 }
-// time O(N^2). spaceO(n^2) ???
+// time O(N^2). spaceO(n^2)
 
 
 // 189. Rotate Array
 class Solution {
     public void rotate(int[] nums, int k) {
         // if k > nums.length
-        // we do not neeed to do k times rotation, we do (k % nums.length) times instead.
-        // for example if k = 8. because of k % nums.length, we only do 1 time.
+        // we do not need to do k times rotation, we do (k % nums.length) times instead.
+        // for example if k = 8 nums = [1,2,3,4,5,6,7]. because of k % nums.length, we only do 1 time.
         k %= nums.length;
 
         // [1, 2, 3, 4, 5, 6, 7] k = 3
@@ -640,7 +641,7 @@ class Solution {
         }
     }
 }
-//O(n)
+// Time O(3n). Space O(1)
 
 
 // 1304. Find N Unique Integers Sum up to Zero
