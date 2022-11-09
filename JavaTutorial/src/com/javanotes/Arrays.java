@@ -994,13 +994,13 @@ class Solution {
         // time O(N). space O(N)
 
         // BOYER-MOORE VOTING ALGORITHM
-        Integer candidate = null;
+        Integer candidate = null; // need Integer object to hold null.
         int count = 0;
         for (int num : nums) {
             if (count == 0) {
-                candidate = num;
+                candidate = num; // setting the count to a number when count reaches 0.
             }
-            count += (num == candidate) ? 1 : -1;
+            count += (num == candidate) ? 1 : -1; // tally the count up whenever we see the candidate number, if not -1
         }
         return candidate;
         // time O(N). space O(1)
@@ -1478,6 +1478,15 @@ public class Solution {
         if (headA == null && headB == null) {
             return null;
         }
+
+        /*
+        INPUT:
+        node where it intersects = 8
+        listA = [4, 1, 8, 4, 5]
+        listB = [5, 6, 1, 8, 4, 5]
+        skipA = 2
+        skipB = 3
+        */
 
         // 1. we create a pointer for each linked list
         ListNode aPointer = headA;
