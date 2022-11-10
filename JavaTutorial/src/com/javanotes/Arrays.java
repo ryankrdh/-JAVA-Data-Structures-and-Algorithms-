@@ -685,7 +685,7 @@ class Solution {
         for (int i = 0; i < nums.length; i++) {
             // i = 0 has no leftSum
             if (i != 0) {
-                leftSum += nums[i-1];
+                leftSum += nums[i-1]; // needs i-1 because we need to exclude the pivot number.
             }
             if (leftSum == totalSum - leftSum - nums[i]) {
                 return i;
