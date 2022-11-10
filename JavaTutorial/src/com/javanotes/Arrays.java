@@ -463,7 +463,7 @@ class Solution {
         return maxprofit;
     }
 }
-//O(n)
+// time O(n). space O(1).
 
 
 // 217. Contains Duplicate
@@ -695,7 +695,7 @@ class Solution {
 
     }
 }
-// O(n)
+// time O(n). space O(1) - only need two variables totalSum, leftSum no matter how big the input is.
 
 
 // 628 Maximum Product of Three Numbers.
