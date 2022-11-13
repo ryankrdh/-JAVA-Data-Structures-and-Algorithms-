@@ -1954,3 +1954,59 @@ class Solution {
     }
 }
 
+
+//148. Reorder List
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public void reorderList(ListNode head) {
+        if (head == null) {
+            return;
+        }
+
+        // find the middle of linked list [Problem 876]
+        // in 1->2->3->4->5->6 find 4
+        ListNode slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        // reverse the second part of the list [Problem 206]
+        // convert 1->2->3->4->5->6 into 1->2->3->4 and 6->5->4
+        // reverse the second half in-place
+        ListNode cur = slow, tmp;
+        ListNode pre = null;
+
+        while (cur != null) {
+            tmp = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = tmp;
+        }
+
+        // merge two sorted linked lists [Problem 21]
+        // merge 1->2->3->4 and 6->5->4 into 1->6->2->5->3->4
+        ListNode first = head, second = pre; // pre will be 6->5->4 due to the previous reverse linked list algorithm
+        while (second.next != null) { // second.next because first will have equal or one more than second. We don't want duplicates of the last element.
+            tmp = first.next;
+            first.next = second;
+            first = tmp;
+
+            tmp = second.next;
+            second.next = first;
+            second = tmp;
+        }
+    }
+}
+// Time complexity: O(n) There are three steps here. To identify the middle node takes O(n) time. To reverse the second part of the list, one needs n/2 operations. The final step, to merge two lists, requires n/2 operations as well. In total, that results in O(n) time complexity.
+
+// Space complexity: O(1), since we do not allocate any additional data structures.
