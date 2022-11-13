@@ -1853,3 +1853,104 @@ class Solution {
     }
 }
 // time O(M+N). space O(M+N)
+
+
+// 138. Copy List with Random Pointer
+/*
+// Definition for a Node.
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
+}
+*/
+
+class Solution {
+    public Node copyRandomList(Node head) {
+        if (head == null) {
+            return null;
+        }
+
+        // Solution 1. Using Hash Map.
+        // Step One. create a copy of the linked list by using hash map. assign pointers by looping through the linked list again.
+
+        // the node that we are working on, a new node for this current node that has next and random pointer.
+        Map<Node, Node> map = new HashMap<>();
+
+        // 1. copy all the nodes
+        Node cur = head;
+        while (cur != null) {
+            // create a new node that has next and random pointers for this cur node.
+            Node node = new Node(cur.val, null, null); //set null to both next, random
+            // put this new node into map for this current node
+            map.put(cur, node);
+            cur = cur.next;
+        }
+
+        // 2. assign pointers
+        cur = head; //assign from the beginning.
+        while (cur != null) {
+            map.get(cur).next = map.get(cur.next);
+            map.get(cur).random = map.get(cur.random);
+            cur=cur.next;
+        }
+        return map.get(head);
+        // time O(n). space O(n).
+
+
+        // Solution 2.
+
+        RandomListNode iter = head, next;
+
+        // First round: make copy of each node,
+        // and link them together side-by-side in a single list.
+        while (iter != null) {
+            next = iter.next;
+
+            RandomListNode copy = new RandomListNode(iter.label);
+            iter.next = copy;
+            copy.next = next;
+
+            iter = next;
+        }
+
+        // Second round: assign random pointers for the copy nodes.
+        iter = head;
+        while (iter != null) {
+            if (iter.random != null) {
+                iter.next.random = iter.random.next;
+            }
+            iter = iter.next.next;
+        }
+
+        // Third round: restore the original list, and extract the copy list.
+        iter = head;
+        RandomListNode pseudoHead = new RandomListNode(0);
+        RandomListNode copy, copyIter = pseudoHead;
+
+        while (iter != null) {
+            next = iter.next.next;
+
+            // extract the copy
+            copy = iter.next;
+            copyIter.next = copy;
+            copyIter = copy;
+
+            // restore the original list
+            iter.next = next;
+
+            iter = next;
+        }
+
+        return pseudoHead.next;
+
+        // time O(n). space O(1)
+    }
+}
+
