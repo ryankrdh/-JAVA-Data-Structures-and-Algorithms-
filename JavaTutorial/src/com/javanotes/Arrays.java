@@ -1,5 +1,49 @@
 package com.javanotes;
 曾方雯
+
+// ARRAYS NOTES
+class OneDArray {
+    public static void main(String args[]) {
+
+        // Initialization, Declaration and Adding Elements in one step
+        int[] myArray = {10,20,30,40};
+
+        // Accessing elements in an array
+        for (int i = 0; i < myArray.length; i++){
+            System.out.println(myArray[i]);
+        }
+
+        // Updating value of element at index 3
+        myArray[3] = 900;
+
+        // Accessing elements in the updated array
+        System.out.println("Updated Array:");
+        for (int i = 0; i < myArray.length; i++){
+            System.out.println(myArray[i]);
+
+        }
+
+    }
+}
+
+
+// TWO DIMENSIONAL ARRRAYS NOTES
+class TwoDArray {
+    public static void main( String args[] ) {
+
+        int[][] myArray = new int[10][] ;
+        for (int i = 0; i < 10; i++)
+        {
+            myArray[i] = new int [10];
+            for (int j = 0; j < 10; j++){
+                myArray[i][j] = i + j;
+                System.out.println(myArray[i][j]);
+            }
+        }
+    }
+}
+
+
 // 242. Valid Anagram
 class Solution {
     public boolean isAnagram(String s, String t) {
