@@ -2013,3 +2013,94 @@ class Solution {
 // one needs n/2 operations. The final step, to merge two lists, requires n/2 operations as well. In total,
 // that results in O(n) time complexity.
 // Space complexity: O(1), since we do not allocate any additional data structures.
+
+
+//146. LRU Cache
+
+class LRUCache {
+    class Node{
+        int key;
+        int val;
+        Node pre;
+        Node next;
+    }
+
+    final Node head = new Node(); // head is dummy node here, no value.
+    final Node tail = new Node(); // tail is dummy node here, no value.
+    Map<Integer, Node> nodeMap; // key is integer, value is node.
+    int cacheCapacity;
+
+    public LRUCache(int capacity) {
+        nodeMap = new HashMap(capacity); // how big the hashmap will be.
+        this.cacheCapacity = capacity;
+        head.next = tail;
+        tail.pre = head;
+    }
+
+    // get from map and update in the linked list
+    public int get(int key) {
+        int result = -1;
+        Node node = nodeMap.get(key); // get the node from the key in the map
+        if (node != null) {
+            // to update the frequency
+            remove(node); // remove it in the tail (calls the remove method)
+            add(node); // and then add it to the front (calls the add method)
+            result = node.val;
+        }
+        return result; // if the condition does not get satisfied in the if loop, it will return -1.
+    }
+
+    // Linked list[pre, node, next] -> [pre, next]
+    public void remove(Node node) { // remove the node from the tail.
+        Node nextNode = node.next;
+        Node preNode = node.pre;
+
+        nextNode.pre = preNode;
+        preNode.next = nextNode;
+    }
+
+    // Linked list
+    public void add(Node node) { // add the node in front of the list(cache) [(dummy)head, headNext] -> [head, node, headNext]
+        Node headNext = head.next;
+        head.next = node; // make the reference head.next to the node that we are adding. Head is dummy node here, it is nothing.
+        node.pre = head;
+        node.next = headNext;
+        headNext.pre = node;
+    }
+
+    // put in the mape and update the linkedlist
+    public void put(int key, int value) {
+        Node node = nodeMap.get(key);
+        if (node != null) { //overwriting. The most recently used will be moved to the front and the least using will get deleted.
+            //update the linked list.
+            remove(node); //remove it
+            add(node); //and then add it to the front
+            node.val = value;
+        } else {
+            if (nodeMap.size() == cacheCapacity) {
+                nodeMap.remove(tail.pre.key); // remove the key from the haspmap
+                remove(tail.pre); //remove in linked list as well
+            }
+            //after we fix the capacity problem,
+            // we add a node
+            Node newNode = new Node();
+            // and then set the key and value
+            newNode.key = key;
+            newNode.val = value;
+
+            nodeMap.put(key, newNode); // add the new node on the hashmap
+            add(newNode); // add the new node on the linked list as well
+        }
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
+
+// Time complexity : O(1) both for put and get.
+// Space complexity : O(capacity) since the space is used only for a hashmap and double linked list with at most capacity + 1 elements.
+
