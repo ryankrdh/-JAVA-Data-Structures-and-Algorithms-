@@ -448,7 +448,7 @@ class Solution {
         return max;
     }
 }
-// O(n)
+// time O(n). space O(1)
 
 
 //122. Best Time to Buy and Sell Stock II (see 121)
@@ -1996,7 +1996,8 @@ class Solution {
         // merge two sorted linked lists [Problem 21]
         // merge 1->2->3->4 and 6->5->4 into 1->6->2->5->3->4
         ListNode first = head, second = pre; // pre will be 6->5->4 due to the previous reverse linked list algorithm
-        while (second.next != null) { // second.next because first will have equal or one more than second. We don't want duplicates of the last element.
+        while (second.next != null) { // second.next because first will have equal or one more than second.
+            // We don't want duplicates of the last element.
             tmp = first.next;
             first.next = second;
             first = tmp;
@@ -2007,6 +2008,8 @@ class Solution {
         }
     }
 }
-// Time complexity: O(n) There are three steps here. To identify the middle node takes O(n) time. To reverse the second part of the list, one needs n/2 operations. The final step, to merge two lists, requires n/2 operations as well. In total, that results in O(n) time complexity.
-
+// Time complexity: O(n) There are three steps here.
+// To identify the middle node takes O(n) time. To reverse the second part of the list,
+// one needs n/2 operations. The final step, to merge two lists, requires n/2 operations as well. In total,
+// that results in O(n) time complexity.
 // Space complexity: O(1), since we do not allocate any additional data structures.
