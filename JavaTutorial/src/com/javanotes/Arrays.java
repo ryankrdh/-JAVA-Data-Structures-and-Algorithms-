@@ -2271,3 +2271,26 @@ public class Queue<V> {
         return temp;
     }
 }
+
+
+// 20. Valid Parentheses
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack();
+        for (char c : s.toCharArray()) { // in java, you need to switch the string to array in order to iterate through the string.
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+            } else if (stack.isEmpty()) { // make sure stack is not empty before we check the pop()
+                return false;
+            } else if (c == ')' && stack.pop() != '(') {
+                return false;
+            } else if (c == ']' && stack.pop() != '[') {
+                return false;
+            } else if (c == '}' && stack.pop() != '{') {
+                return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+}
+// time: O(n). space: O(n)
