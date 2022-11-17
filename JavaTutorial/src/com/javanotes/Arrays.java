@@ -2294,3 +2294,62 @@ class Solution {
     }
 }
 // time: O(n). space: O(n)
+
+
+// 496. Next Greater Element I
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        // corner case
+
+        Stack<Integer> stack = new Stack<>();
+
+        // <the current number, the next greater number for this current number>
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        // 1. traverse nums2[] and put the pair (small, big) into the map
+        // <the current num2, the next greater number for this current num2>
+        for(int num2 : nums2){
+            // 2. if the previous number in the stack is smaller than the current num, which means we found a pair
+            // we use while instead of if
+            while(!stack.isEmpty() && stack.peek() < num2) // uses while since the array could be [1,2,3,4] 4 will be paired with 1:4, 2:4, 3:4.
+                map.put(stack.pop(), num2);
+
+            // we need to push num2 into stack even if num2 was put into map earlier
+            // because we need to push the current num2 for the next iteration check
+            stack.push(num2);
+        }
+
+        // 2.traverse nums1 and find the pair in map, if not, put -1
+        int[] res = new int[nums1.length];
+        for(int i = 0; i < nums1.length; i++){
+            res[i] = map.getOrDefault(nums1[i], -1);
+        }
+
+        return res;
+    }
+}
+// time O(m + n). space O(m + n)
+
+
+// 1047. Remove All Adjacent Duplicates In String.
+class Solution {
+    public String removeDuplicates(String s) {
+        Stack<Character> st = new Stack<>();
+        st.push(s.charAt(0));
+        for (int i = 1; i < s.length(); i++) {
+            if (!st.isEmpty() && st.peek() == s.charAt(i)){
+                st.pop();
+                continue;
+            }
+            st.push(s.charAt(i));
+        }
+        StringBuilder sb = new StringBuilder();
+        while(!st.isEmpty()){
+            sb.append(st.pop());
+        }
+        sb.reverse();
+        return sb.toString();
+    }
+}
+// Time complexity : O(N)
+// Space complexity : O(N)
