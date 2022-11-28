@@ -2358,7 +2358,7 @@ class Solution {
 // 387. First Unique Character in a String.
 class Solution {
     public int firstUniqChar(String s) {
-        // Using hash table to starore the counts for all 26 alphabets.
+        // Using hash table to store the counts for all 26 alphabets.
         // corner case
         if (s == null || s.length() == 0) {
             return -1;
