@@ -2353,3 +2353,31 @@ class Solution {
 }
 // Time complexity : O(N)
 // Space complexity : O(N)
+
+
+// 387. First Unique Character in a String.
+class Solution {
+    public int firstUniqChar(String s) {
+        // Using hash table to starore the counts for all 26 alphabets.
+        // corner case
+        if (s == null || s.length() == 0) {
+            return -1;
+        }
+
+        // 1. store the count into map.
+        Map<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i < s.length(); i++) {
+            map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0) + 1);
+        }
+
+        //2. find the unique character's index.
+        for (int i = 0; i < s.length(); i++) {
+            int count = map.get(s.charAt(i));
+            if (count == 1) {
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+// time O(N). space O(1)
