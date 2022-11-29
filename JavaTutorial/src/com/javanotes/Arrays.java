@@ -1,5 +1,5 @@
 package com.javanotes;
-曾方雯
+
 
 // ARRAYS NOTES
 class OneDArray {
@@ -2545,6 +2545,9 @@ class Solution {
             // If the current character make a pair with the last character in the stack,
             // remove both of them. Otherwise, we add the current character to stack.
             if (!stack.isEmpty() && Math.abs(stack.lastElement() - currChar) == 32) {
+                // The difference between the acii lower and uppercase value is 32.
+                // System.out.println(Math.abs(stack.lastElement()));
+                // System.out.println(Math.abs(currChar));
                 stack.pop();
             } else {
                 stack.add(currChar);
@@ -2571,6 +2574,7 @@ Therefore, the overall time complexity is O(n)
 Space complexity: O(n)
 We use a stack to store all the characters we encounter. Since we only pop characters when finding a pair, in worst-case scenario, we may have O(n) characters stored in stack. Thus the space complexity is O(n).
 */
+
 
 
 
