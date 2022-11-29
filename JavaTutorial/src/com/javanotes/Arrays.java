@@ -2499,7 +2499,7 @@ class MyQueue {
 
     /** Get the front element. */
     public int peek() {
-        if(!s2.isEmpty()) {
+        if(!s2.isEmpty()) { // check to see if s2 is not empty, or the order of s2 will not be correct.
             s2.peek();
         } else {
             while(!s1.isEmpty()){
