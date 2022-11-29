@@ -27,7 +27,7 @@ class OneDArray {
 }
 
 
-// TWO DIMENSIONAL ARRRAYS NOTES
+// TWO DIMENSIONAL ARRAYS NOTES
 class TwoDArray {
     public static void main( String args[] ) {
 
@@ -2422,7 +2422,7 @@ Input
 // 225. Implement Stack using Queues
 class MyStack {
 
-    Queue<Integer> queue;
+    Queue<Integer> queue; // initialize Queue outside of the classes in order for them to all access it.
 
     /** Initialize your data structure here. */
     public MyStack() {
@@ -2468,3 +2468,79 @@ class MyStack {
 // after we reverse, now the order in the queue is the same as stack.
 
 
+// 232. Implement Queue using Stacks
+class MyQueue {
+    Stack<Integer> s1; // standard stack, FILO
+    Stack<Integer> s2; // reverse order because queue is FIFO, we need to store the first element in this stack
+
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        s1 = new Stack<Integer>();
+        s2 = new Stack<Integer>();
+    }
+
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        s1.push(x);
+    }
+
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        if(s2.isEmpty()) {
+            while(!s1.isEmpty()){
+                // keep adding elements from s1 into s2 till s1 is empty
+                // so that we get FIFO(same in the queue order) order in the s2
+                s2.push(s1.pop());
+            }
+        }
+        // pop from s2 which has the FIFO order
+        return s2.pop();
+    }
+
+    /** Get the front element. */
+    public int peek() {
+        if(!s2.isEmpty()) {
+            s2.peek();
+        } else {
+            while(!s1.isEmpty()){
+                // keep adding elements from s1 into s2 till s1 is empty
+                // so that we get FIFO(same in the queue order) order in the s2
+                // s1.pop(): FILO
+                // s2.push(s1.pop()): FIFO
+                s2.push(s1.pop());
+            }
+        }
+        // s2 has FIFO order now, which is the same as Queue order
+        return s2.peek();
+    }
+
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        return s1.isEmpty() && s2.isEmpty();
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
+
+// Time Push-O(1) per operation.
+// Space Pop-Amortized O(1)  per operation.
+
+
+/*
+EXTRA NOTES:
+
+* ArrayList internally uses a dynamic array to store its elements.
+LinkedList uses Doubly Linked List to store its elements. ArrayList is slow as array manipulation is slower.
+LinkedList is faster being node based as not much bit shifting required.
+
+* ListNode is a node in a linked list. SingleList is a linked list.
+To draw an analogy - a node is a link in a chain; the linked list is the chain itself.
+
+ */
