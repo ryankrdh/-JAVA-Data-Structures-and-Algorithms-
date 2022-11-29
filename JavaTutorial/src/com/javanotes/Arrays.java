@@ -2403,9 +2403,10 @@ Input
 
     public double next(int val) { // Calls the next()
         if(q.size() == size){
-            sum = sum - q.poll(); // removes the first element of the Queue. peek() retrieves the element but does not remove. Both returns NULL if the queue is empty
+            sum -= q.poll(); // removes the first element of the Queue and returns the element. ALSO update the sum.
+            // peek() retrieves the element but does not remove. Both returns NULL if the queue is empty
         }
-        q.offer(val); // same as add() but does not throw an exception when the capacity is full
+        q.offer(val); // same as add() but does not throw an exception when the capacity is full. it returns boolean.
         sum += val;
         return sum/q.size();
     }
