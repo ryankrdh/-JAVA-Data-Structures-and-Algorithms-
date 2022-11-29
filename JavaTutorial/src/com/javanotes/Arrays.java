@@ -2533,6 +2533,59 @@ class MyQueue {
 // Space Pop-Amortized O(1)  per operation.
 
 
+// 1544. Make The String Great.
+
+class Solution {
+    public String makeGood(String s) {
+        // Use stack to store the visited characters.
+        Stack<Character> stack = new Stack<>();
+
+        // Iterate over 's'.
+        for (char currChar : s.toCharArray()) { // change char to array in order to use for each.
+            // If the current character make a pair with the last character in the stack,
+            // remove both of them. Otherwise, we add the current character to stack.
+            if (!stack.isEmpty() && Math.abs(stack.lastElement() - currChar) == 32) {
+                stack.pop();
+            } else {
+                stack.add(currChar);
+            }
+        }
+
+        // Returns the string concatenated by all characters left in the stack.
+        StringBuilder ans = new StringBuilder();
+        for (char currChar : stack) {
+            ans.append(currChar);
+        }
+
+        return ans.toString();
+    }
+}
+/*
+Let n be the length of the input string s.
+
+Time complexity: O(n)
+We only need one iteration over s.
+At each step, we either remove the last character from stack, or add a character to stack, both of which take constant time.
+Therefore, the overall time complexity is O(n)
+
+Space complexity: O(n)
+We use a stack to store all the characters we encounter. Since we only pop characters when finding a pair, in worst-case scenario, we may have O(n) characters stored in stack. Thus the space complexity is O(n).
+*/
+
+
+
+/*
+
+*
+*
+*
+*
+*
+*
+*
+*
+
+*/
 /*
 EXTRA NOTES:
 
@@ -2542,5 +2595,6 @@ LinkedList is faster being node based as not much bit shifting required.
 
 * ListNode is a node in a linked list. SingleList is a linked list.
 To draw an analogy - a node is a link in a chain; the linked list is the chain itself.
-
  */
+
+
